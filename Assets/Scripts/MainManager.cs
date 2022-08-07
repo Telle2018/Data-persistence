@@ -6,11 +6,14 @@ using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
 {
+    public static MainManager Instance;
+
     public Brick BrickPrefab;
     public int LineCount = 6;
     public Rigidbody Ball;
 
     public Text ScoreText;
+    public Text PlayerName;
     public GameObject GameOverText;
     
     private bool m_Started = false;
