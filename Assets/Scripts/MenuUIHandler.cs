@@ -2,13 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 public class MenuUIHandler : MonoBehaviour
 {
+    [SerializeField] private TMP_InputField playerNameField;
     public string playerName;
+
+    public string PlayerName
+    {
+        get => playerName;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +32,8 @@ public class MenuUIHandler : MonoBehaviour
 
     public void StartNew()
     {
+        playerName = playerNameField.GetComponent<TMP_InputField>().text;
+        ScoreSaver.Instance.PlayerName = playerName;
         SceneManager.LoadScene(1);
     }
 

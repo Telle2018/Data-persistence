@@ -6,14 +6,11 @@ using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
 {
-    public static MainManager Instance;
-
     public Brick BrickPrefab;
     public int LineCount = 6;
     public Rigidbody Ball;
 
     public Text ScoreText;
-    public Text PlayerName;
     public GameObject GameOverText;
     
     private bool m_Started = false;
@@ -39,6 +36,8 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
+
+        ScoreText.text = ScoreSaver.Instance.PlayerName + "'s " + $"Score : {m_Points}";
     }
 
     private void Update()
@@ -68,7 +67,7 @@ public class MainManager : MonoBehaviour
     void AddPoint(int point)
     {
         m_Points += point;
-        ScoreText.text = $"Score : {m_Points}";
+        ScoreText.text = ScoreSaver.Instance.PlayerName + "'s " + $"Score : {m_Points}";
     }
 
     public void GameOver()
