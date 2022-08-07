@@ -12,6 +12,7 @@ public class MainManager : MonoBehaviour
 
     public Text ScoreText;
     public GameObject GameOverText;
+    public Text HighScoreText;
     
     private bool m_Started = false;
     private int m_Points;
@@ -38,6 +39,7 @@ public class MainManager : MonoBehaviour
         }
 
         ScoreText.text = ScoreSaver.Instance.PlayerName + "'s " + $"Score : {m_Points}";
+        HighScoreText.text = "Best Score: " + ScoreSaver.Instance.HighScorePlayer + ": " + ScoreSaver.Instance.HighScore;
     }
 
     private void Update()
@@ -74,5 +76,16 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+
+        if (m_Points > ScoreSaver.Instance.HighScore)
+        {
+            ScoreSaver.Instance.SaveHighScore(m_Points);
+        }
+        HighScoreText.text = "Best Score: " + ScoreSaver.Instance.HighScorePlayer + ": " + ScoreSaver.Instance.HighScore;
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
